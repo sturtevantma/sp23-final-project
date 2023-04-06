@@ -15,8 +15,8 @@ class Trie {
     private:
         TrieNode* root; // A pointer to the root of the trie
         TrieNode* insert(TrieNode root, std::string s); // Recursive insert
+        TrieNode* remove(TrieNode* root, std::string s); // Recursive remove
         void dictionary(TrieNode* root, std::ostream os, std::string delim);
-        bool hasChildren(TrieNode* node); //helper function to determine if a node has children
 
     public:
         Trie(); // Default constructor
