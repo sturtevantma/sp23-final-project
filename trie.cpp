@@ -33,3 +33,16 @@ void Trie::dictionary(TrieNode* root, std::ostream &os, std::string delim) {
         dictionary(root->children[i], os, delim);
     }
 }
+
+void Trie::remove(TrieNode* node, std::string s) {
+
+}
+
+bool Trie::hasChildren(TrieNode* node) {
+    for (int i = 0; i < 128; i++) {
+        if (node->children[i] != nullptr) {
+            return true;
+        }
+    }
+    return false;
+}
