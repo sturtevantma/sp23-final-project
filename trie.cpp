@@ -16,7 +16,7 @@ void Trie::dictionary(std::ostream &os, std::string delim) {
     this->dictionary(this->root, os, delim);
 }
 
-void Trie::dictionary(TrieNode* root std::ostream &os, std::string delim) {
+void Trie::dictionary(TrieNode* root, std::ostream &os, std::string delim) {
     if(root == nullptr) {
         return;
     }
