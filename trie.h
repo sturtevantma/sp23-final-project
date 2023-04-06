@@ -16,7 +16,7 @@ class Trie {
         TrieNode* root; // A pointer to the root of the trie
         TrieNode* insert(TrieNode root, std::string s); // Recursive insert
         TrieNode* remove(TrieNode* root, std::string s); // Recursive remove
-        void dictionary(TrieNode* root, std::ostream os, std::string delim);
+        void dictionary(TrieNode* root, std::ostream &os, std::string delim);
 
     public:
         Trie(); // Default constructor
