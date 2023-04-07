@@ -58,7 +58,20 @@ void Trie::dictionary(TrieNode* root, std::ostream &os, std::string delim) {
 }
 
 void Trie::remove(TrieNode* node, std::string s) {
-
+    if (s.empty()) { // If the end of the string is reached
+        if (node->endpoint) { // If the last character is an endpoint
+            node->endpoint = false; // Mark the endpoint as false to remove the word
+        }
+        return;
+    }
+    char c = s[0];
+    if (node->children[c]) { // If the character exists in the trie
+        remove(node->children[c], s.substr(1)); // Recursively remove the remaining characters
+        if (!hasChildren(node->children[c])) { // If the child node has no other children
+            delete node->children[c]; // Delete the child node
+            node->children[c] = nullptr; // Set the child pointer to nullptr
+        }
+    }
 }
 
 bool Trie::hasChildren(TrieNode* node) {
