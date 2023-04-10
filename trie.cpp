@@ -12,10 +12,12 @@ Trie::Trie() {
     this->root = new TrieNode(0, 0);
 }
 
+// Write set to output stream (defaults to cout)
 void Trie::dictionary(std::ostream &os, std::string delim) {
     this->dictionary(this->root, os, delim);
 }
 
+// Checks if a string s is in the set
 bool Trie::contains(std::string s) {
 
     TrieNode* temp = this->root;
@@ -39,6 +41,7 @@ bool Trie::contains(std::string s) {
     return false;
 }
 
+// Private method to recursively send contents of the set to an output stream
 void Trie::dictionary(TrieNode* root, std::ostream &os, std::string delim) {
     if(root == nullptr) {
         return;
@@ -57,6 +60,7 @@ void Trie::dictionary(TrieNode* root, std::ostream &os, std::string delim) {
     }
 }
 
+// Private function removes nodes recursively
 void Trie::remove(TrieNode* node, std::string s) {
     if (s.empty()) { // base case: end of string
         node->endpoint = false;
@@ -82,6 +86,7 @@ void Trie::remove(TrieNode* node, std::string s) {
     }
 }
 
+// Returns true|false based on whether a node has at least one child.
 bool Trie::hasChildren(TrieNode* node) {
     for (int i = 0; i < 128; i++) {
         if (node->children[i] != nullptr) {
@@ -91,6 +96,7 @@ bool Trie::hasChildren(TrieNode* node) {
     return false;
 }
 
+// Add a string to the set
 void Trie::insert(std::string s){
     // Take in string as s
     TrieNode* temp = this->root;
@@ -115,6 +121,62 @@ void Trie::insert(std::string s){
     temp->endpoint = true;
 }
 
+// Remove a string from the set
 void Trie::remove(std::string s) {
     remove(root, s);
+}
+
+// A public function for the user to generate a dot file of their trie
+void Trie::generate_dot_file(std::string fname) {
+    std::ofstream file;
+    file.open(fname);
+    if(!file.is_open()) {
+        return;
+    }
+
+    file << "digraph Trie {\n";
+
+    generate_dot_file(this->root, file);
+
+    file << "\n}";
+
+}
+
+// A recursive function that creates most of the DOT file
+void Trie::generate_dot_file(TrieNode* node, std::ostream &os) {
+    // If null do not append to file
+    if(node == nullptr) {
+        return;
+    }
+    // root_key = memory address of the node, used as a key to identify nodes in the dot file
+    std::string root_key = std::to_string((long long)node);
+
+    // create node label and color
+    os << root_key << "[label=";
+    if(node == this->root) {
+        os << "root";
+    } else {
+        os << '"' << node->data << '"';
+    }
+
+    os << ",color=";
+    if(node->endpoint) {
+        os << "red";
+    } else {
+        os << "black";
+    }
+    os << "]\n\n";
+
+    // Add graphic for pointing at child nodes
+    for(int i = 0; i < 128; i++) {
+        if(node->children[i] != nullptr) {
+            os << root_key << "->" << std::to_string((long long)node->children[i]) << "\n";
+        }
+    }
+
+    // Call for all children
+    for(int i = 0; i < 128; i++) {
+        generate_dot_file(node->children[i], os);
+    }
+    return;
 }
