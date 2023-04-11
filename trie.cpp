@@ -66,7 +66,6 @@ void Trie::remove(TrieNode* node, std::string s) {
         node->endpoint = false;
         if (!hasChildren(node)) { // node has no children
             delete node;
-            node = nullptr;
         }
         return;
     }
@@ -75,14 +74,12 @@ void Trie::remove(TrieNode* node, std::string s) {
     if (node->children[c] != nullptr) { // character found
         remove(node->children[c], s.substr(1));
         if (!hasChildren(node->children[c]) && !node->children[c]->endpoint) { // child has no children and is not an endpoint
-            delete node->children[c];
             node->children[c] = nullptr;
         }
     }
 
     if (!hasChildren(node) && !node->endpoint) { // node has no children and is not an endpoint
         delete node;
-        node = nullptr;
     }
 }
 
@@ -123,6 +120,9 @@ void Trie::insert(std::string s){
 
 // Remove a string from the set
 void Trie::remove(std::string s) {
+    if (!contains(s)) { // If string is not in the trie, do nothing
+        return;
+    }
     remove(root, s);
 }
 
@@ -203,4 +203,4 @@ std::string Trie::get_information(std::string s) {
     }
     throw "Contact not found";
     return "\0";
-}   
+}
