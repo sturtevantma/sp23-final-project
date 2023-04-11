@@ -20,7 +20,6 @@ void Trie::dictionary(std::ostream &os, std::string delim) {
 
 // Checks if a string s is in the set
 bool Trie::contains(std::string s) {
-
     TrieNode* temp = this->root;
     //Loop over string 
     for (int i = 0; i < s.length(); i++) {
@@ -181,3 +180,27 @@ void Trie::generate_dot_file(TrieNode* node, std::ostream &os) {
     }
     return;
 }
+
+std::string Trie::get_information(std::string s) {
+    TrieNode* temp = this->root;
+    //Loop over string 
+    for (int i = 0; i < s.length(); i++) {
+        //If the node has the child
+        if (temp->children[s.at(i)]) {
+            //Assign temp to the child and continue to next iteration
+            temp = temp->children[s.at(i)];
+            continue;
+        }
+        //Else if the child is never found then return false
+        else if (!temp->children[s.at(i)]) {
+            throw "Contact not found";
+            return "\0";
+        }
+    }
+    //If we looped over the entire word then we check if the node is an endpoint to return the information
+    if (temp->endpoint) {
+        return temp->information;
+    }
+    throw "Contact not found";
+    return "\0";
+}   
