@@ -4,10 +4,11 @@
 
 struct TrieNode {
     public:
-        TrieNode(char n, bool end);
+        TrieNode(char n, bool end, std::string info = "");
     private:
         char data;
         bool endpoint;
+        std::string information;
         TrieNode* children[128];
     friend class Trie;
 };
@@ -28,4 +29,5 @@ class Trie {
         bool contains(std::string s); // Check if s is a word in the set
         void dictionary(std::ostream &os = std::cout, std::string delim = "\n"); // Send entire dictionary to stream separate all words by delim
         void generate_dot_file(std::string fname); // Generates the DOT file used for representing the trie
+        std::string get_information(std::string s); // Retrieves information about a string
 };

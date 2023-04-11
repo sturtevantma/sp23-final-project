@@ -1,8 +1,9 @@
 #include "trie.h"
 
-TrieNode::TrieNode(char n, bool end) {
+TrieNode::TrieNode(char n, bool end, std::string info) {
     this->data = n;
     this->endpoint = end;
+    this->information = info;
     for(int i = 0; i < 128; i++) {
         this->children[i] = nullptr;
     }
