@@ -96,18 +96,20 @@ bool Trie::hasChildren(TrieNode* node) {
     return false;
 }
 
+
 // Add a string to the set
-void Trie::insert(std::string s){
+void Trie::insert(std::string s, std::string info){
     // Take in string as s
     TrieNode* temp = this->root;
     // Loop through s
     for(int i = 0; i < s.length(); i++){
         char x = s.at(i);
         // if child is not NULL:
-        if(temp->children[x]){
+        if(temp->children[x]) {
             temp = temp->children[x];
-            // if child IS NULL,
-        }else{
+        }
+        // if child IS NULL,
+        else{
             // Create a new node with letter
             TrieNode* newNode = new TrieNode(x, false);
             // Make new node a child of temp
@@ -119,6 +121,7 @@ void Trie::insert(std::string s){
 
     // Set the final node as an endpoint
     temp->endpoint = true;
+    temp->information = info;
 }
 
 // Remove a string from the set
