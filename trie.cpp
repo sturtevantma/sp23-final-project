@@ -41,6 +41,28 @@ bool Trie::contains(std::string s) {
     return false;
 }
 
+TrieNode* Trie::find_terminal(std::string s) {
+    TrieNode* temp = this->root;
+    //Loop over string 
+    for (int i = 0; i < s.length(); i++) {
+        //If the node has the child
+        if (temp->children[s.at(i)]) {
+            //Assign temp to the child and continue to next iteration
+            temp = temp->children[s.at(i)];
+            continue;
+        }
+        //Else if the child is never found then return false
+        else if (!temp->children[s.at(i)]) {
+            return nullptr;
+        }
+    }
+    //If we looped over the entire word then we check if the node is an endpoint to signal a valid word
+    if (temp->endpoint) {
+        return temp;
+    }
+    return nullptr;
+}
+
 // Private method to recursively send contents of the set to an output stream
 void Trie::dictionary(TrieNode* root, std::ostream &os, std::string delim) {
     if(root == nullptr) {
@@ -182,25 +204,27 @@ void Trie::generate_dot_file(TrieNode* node, std::ostream &os) {
 }
 
 std::string Trie::get_information(std::string s) {
-    TrieNode* temp = this->root;
-    //Loop over string 
-    for (int i = 0; i < s.length(); i++) {
-        //If the node has the child
-        if (temp->children[s.at(i)]) {
-            //Assign temp to the child and continue to next iteration
-            temp = temp->children[s.at(i)];
-            continue;
-        }
-        //Else if the child is never found then return false
-        else if (!temp->children[s.at(i)]) {
-            throw "Contact not found";
-            return "\0";
-        }
+    // Find if nullptr exists on given input
+    TrieNode* temp = find_terminal(s);
+    //If not then return throw and return null
+    if (temp == nullptr) {
+        throw "Contact not found";
+        return "\0";
     }
-    //If we looped over the entire word then we check if the node is an endpoint to return the information
-    if (temp->endpoint) {
-        return temp->information;
-    }
-    throw "Contact not found";
-    return "\0";
+    // Return contact info
+    return temp->information;
 }   
+
+bool Trie::store_information(std::string s, std::string information) {
+    // Find if given word exists
+    TrieNode* temp = find_terminal(s);
+    // If not then return false
+    if (temp == nullptr) {
+        // Unsuccessful change
+        return false;
+    }
+    // Change the terminal node of the input to phone number given
+    temp->information = information;
+    // Return true to show that the change was a success
+    return true;
+}

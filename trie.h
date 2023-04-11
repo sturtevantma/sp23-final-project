@@ -21,6 +21,7 @@ class Trie {
         void remove(TrieNode* node, std::string s); // Recursive remove
         bool hasChildren(TrieNode* node); // helper function; returns true if a node has children
         void generate_dot_file(TrieNode* node, std::ostream &os); // Recursive generate
+        TrieNode* find_terminal(std::string s); // Find's terminal node if it exists
 
     public:
         Trie(); // Default constructor
@@ -30,4 +31,5 @@ class Trie {
         void dictionary(std::ostream &os = std::cout, std::string delim = "\n"); // Send entire dictionary to stream separate all words by delim
         void generate_dot_file(std::string fname); // Generates the DOT file used for representing the trie
         std::string get_information(std::string s); // Retrieves information about a string
+        bool store_information(std::string s, std::string information); // Stores information in contact
 };
