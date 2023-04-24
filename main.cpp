@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 
     // Let user interact with contacts
     while(true) {
-        std::cout << "\nPress any key to continue...\n";
+        std::cout << "\nEnter any letter to continue...\n";
         char cont;
         std::cin >> cont;
         // Prompt user for command
