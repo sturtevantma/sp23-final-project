@@ -8,8 +8,7 @@ Dean Geraci
 
 # Summary and Repo Address
 
-MAKE A SUMMARY
-
+Retrieving contact information via Tries by inputing keys that are strings.
 
 
 Repo Address: https://github.com/sturtevantma/sp23-final-project
@@ -17,7 +16,7 @@ Repo Address: https://github.com/sturtevantma/sp23-final-project
 # Documentation
 
 ### TrieNode
-Category is a container of grades for the course  
+Represent ending of keys and storing potentail information on end point nodes . 
 `TrieNode`  
 The name of the category  
 `TrieNode::data`  
@@ -25,12 +24,12 @@ The category's weight for your course grade
 `TrieNode::endpoint`  
 A vector of pairs containing all assignments and the achieved grades  
 `TrieNode::information`  
-
+The value that we are retrieving when we input a key
 `TrieNode::children`  
-
+128 potential children represntative of the ASCII Value Table
 
 ### Trie
-PUT SMALL DESCRIPTION  
+Storing and retrieving information as well as inserting and removing keys.  
 `Trie::root`  
 A pointer to the root of the trie  
 `TrieNode::insert()`  
@@ -53,6 +52,3 @@ Retrieves information about a string
 Stores information in contact
 
 ### How to Compile  
-
-
-# Planning
