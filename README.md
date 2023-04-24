@@ -16,7 +16,7 @@ Repo Address: https://github.com/sturtevantma/sp23-final-project
 # Documentation
 
 ### TrieNode
-Represent ending of keys and storing potentail information on end point nodes . 
+Represent ending of keys and storing potential information on end point nodes  
 `TrieNode`  
 The name of the category  
 `TrieNode::data`  
@@ -52,3 +52,6 @@ Retrieves information about a string
 Stores information in contact
 
 ### How to Compile  
+When compiling, you need to type `g++ main.cpp trie.cpp`
+To execute, type `./a.exe <input file name>`
+To use the program follow the on screen prompt.
