@@ -2,13 +2,6 @@
 #include <fstream>
 #include <sstream>
 
-std::string get_name(std::string &s) {
-    std::string temp = "";
-    while(std::cin >> temp) {
-        s += temp;
-    }
-}
-
 int main(int argc, char* argv[]) {
 
     // Initialize trie and fname variables
@@ -147,7 +140,7 @@ int main(int argc, char* argv[]) {
             case 7:
                 // Generate dot file
                 if(ofname == "") {
-                    std::cout << "\nNo output file provided, generating...";
+                    std::cout << "\nNo dot file provided, generating...";
                     ofname = ifname + ".DOT";
                 }
                 trie_.generate_dot_file(ofname);
@@ -159,5 +152,22 @@ int main(int argc, char* argv[]) {
     }
 
     end:
+
+    // Save new contact sheet to input file
+    std::ofstream save_stream;
+    save_stream.open(ifname);
+
+    // Open a string stream with all the contact names
+    std::stringstream dictionary("");
+    trie_.dictionary(dictionary);
+
+    // Add each name and info to the contact file
+    std::string name;
+    std::string info;
+    while(dictionary >> name) {
+        save_stream << '"' << name << "\" \"" << trie_.get_information(name) << '"' << std::endl;
+    }
+
+
     return 0;
 }
