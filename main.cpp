@@ -11,18 +11,20 @@ std::string get_name(std::string &s) {
 
 int main(int argc, char* argv[]) {
 
+    // Initialize trie and fname variables
     Trie trie_;
     std::string ifname = "", ofname = "";
 
-    if(argc > 1)
-        ifname = argv[1];
+    // If the file names were given get them
+    ifname = argv[1];
     if(argc > 2)
         ofname = argv[2];
 
-
+    // Open the file
     std::ifstream in_file;
     in_file.open(ifname);
 
+    // Parse contact list
     std::string line;
     while(std::getline(in_file, line)) {
 
@@ -58,12 +60,14 @@ int main(int argc, char* argv[]) {
         int selection = 0;
         std::string in;
         std::cin >> in;
+        // Make sure selection is a number
         try {
             selection = std::stoi(in);
         } catch(...) {
             std::cout << "Please enter a number [0-7], you entered " + in + '\n';
             continue;
         }
+        // Clear the cin stream to allow getline to work
         std::cin.clear();
         while (std::cin.get() != '\n')
         {
@@ -80,6 +84,7 @@ int main(int argc, char* argv[]) {
                 goto end;
                 break;
             case 1:
+                // Fetch contact info
                 std::cout << "Enter a contact name: ";
                 std::getline(std::cin, name);
                 if(trie_.contains(name)) {
@@ -89,6 +94,7 @@ int main(int argc, char* argv[]) {
                 }
                 continue;
             case 2:
+                // Add contact
                 std::cout << "Enter a contact name: ";
                 std::getline(std::cin, name);
                 if(trie_.contains(name)) {
@@ -101,6 +107,7 @@ int main(int argc, char* argv[]) {
                 }
                 break;
             case 3:
+                // Remove contact
                 std::cout << "Enter a contact name: ";
                 std::getline(std::cin, name);
                 if(trie_.contains(name)) {
@@ -111,6 +118,7 @@ int main(int argc, char* argv[]) {
                 }
                 break;
             case 4:
+                // Check if contact exists
                 std::cout << "Enter a contact name: ";
                 std::getline(std::cin, name);
                 if(trie_.contains(name)) {
@@ -120,9 +128,11 @@ int main(int argc, char* argv[]) {
                 }
                 break;
             case 5:
+                // Print contact list
                 trie_.dictionary();
                 break;
             case 6:
+                // Update contact information
                 std::cout << "Enter a contact name: ";
                 std::getline(std::cin, name);
                 if(trie_.contains(name)) {
@@ -135,6 +145,7 @@ int main(int argc, char* argv[]) {
                 }
                 break;
             case 7:
+                // Generate dot file
                 if(ofname == "") {
                     std::cout << "\nNo output file provided, generating...";
                     ofname = ifname + ".DOT";
