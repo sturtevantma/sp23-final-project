@@ -24,9 +24,9 @@ The name of the category
 The category's weight for your course grade   
 `TrieNode::endpoint`  
 A vector of pairs containing all assignments and the achieved grades  
-'TrieNode::information'  
+`TrieNode::information`  
 
-'TrieNode::children'  
+`TrieNode::children`  
 
 
 ### Trie
