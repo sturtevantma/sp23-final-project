@@ -10,8 +10,7 @@ int main(int argc, char* argv[]) {
 
     // If the file names were given get them
     ifname = argv[1];
-    if(argc > 2)
-        ofname = argv[2];
+    ofname = argv[1];
 
     // Open the file
     std::ifstream in_file;
@@ -158,14 +157,25 @@ int main(int argc, char* argv[]) {
     save_stream.open(ifname);
 
     // Open a string stream with all the contact names
-    std::stringstream dictionary("");
+    std::stringstream dictionary;
     trie_.dictionary(dictionary);
 
     // Add each name and info to the contact file
     std::string name;
     std::string info;
-    while(dictionary >> name) {
-        save_stream << '"' << name << "\" \"" << trie_.get_information(name) << '"' << std::endl;
+    while(std::getline(dictionary, name)) {
+        try {
+            info = trie_.get_information(name);
+        } catch(...) {
+            continue;
+        }
+        if(save_stream.good()) {
+            save_stream << '"' << name << "\" \"";
+            save_stream << info;
+            save_stream << '"' << std::endl;
+        } else {
+            std::cout << "\nError while saving, data lost...\n";
+        }
     }
 
 
