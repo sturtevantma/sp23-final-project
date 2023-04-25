@@ -16,7 +16,7 @@ Repo Address: https://github.com/sturtevantma/sp23-final-project
 # Documentation
 
 ### TrieNode
-Represent ending of keys and storing potentail information on end point nodes . 
+Represent ending of keys and storing potential information on end point nodes  
 `TrieNode`  
 The name of the category  
 `TrieNode::data`  
@@ -52,3 +52,27 @@ Retrieves information about a string
 Stores information in contact
 
 ### How to Compile  
+When compiling, you need to type `g++ main.cpp trie.cpp`
+To execute, type `./a.exe <input file name>`
+To use the program follow the on screen prompt.
+
+### How to Operate
+The on screen prompt will ask you to enter any letter and to hit the enter key afterwards.  
+
+Then the user will be asked to one of the numbers from 1-7, 0 is also an option and will end the program.  
+
+[1] - Fetch Contact: User will be prompted to enter a name, then the corresponding contact information will be outputted to the user.  
+
+[2] - Add a Contact: User will be prompted to enter a name and contact information. Both the name and contact information will be stores in the text.txt file.  
+
+[3] - Remove Contact: User will be prompted to enter a name. Both the name and the corresponding contact information will be removed from the text.txt file.  
+
+[4] - Check if Contact Exists: User will be prompted to enter a name. If the name is in the text.txt file "Contact exists" will be outputted, if not in the file "Contact does not exist" will be outputted.  
+
+[5] - Print Contact List: Will print all of the names and corresponding contact information.  
+
+[6] - Edit Contact Information: User will be prompted to enter a name. If the name is in the text.txt file "Enter contact info:" will be printed, then the user can input the new contact information. After inputting the new info, "Contact updated" will be printed. If the name is not in the file "Contact does not exist" will be printed.  
+
+[7] - Create trie DOT file: Will create a visualized Trie containing the data in your contact list  
+
+[0] - Quit: Entering 0 ends the program.  
