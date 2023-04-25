@@ -67,7 +67,7 @@ Then the user will be asked to one of the numbers from 1-7, 0 is also an option 
 
 [3] - Remove Contact: User will be prompted to enter a name. Both the name and the corresponding contact information will be removed from the text.txt file.  
 
-[4] - Check if Contact Exists: User will be prompted to enter a name. If the name is in the text.txt file "Contact exists" will be outputted, if not in the file "Contact does not exist" will be outputted.  
+[4] - Check if Contact Exists: User will be prompted to enter a name. If the name is in the text.txt file "Contact exists" will be printed, if not in the file "Contact does not exist" will be printed.  
 
 [5] - Print Contact List: Will print all of the names and corresponding contact information.  
 
